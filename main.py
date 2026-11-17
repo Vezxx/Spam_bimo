@@ -4,6 +4,29 @@ from google.protobuf.timestamp_pb2 import Timestamp
 from io import BytesIO
 import telebot
 from xCore import *
+import os
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import threading
+
+
+# سيرفر وهمي بسيط لفتح بورت وترضية منصة Render
+class SimpleHandler(BaseHTTPRequestHandler):
+
+  def do_GET(self):
+    self.send_response(200)
+    self.end_headers()
+    self.wfile.write(b"Bot is alive!")
+
+
+def run_server():
+  port = int(os.environ.get("PORT", 10000))
+  server = HTTPServer(("0.0.0.0", port), SimpleHandler)
+  server.serve_forever()
+
+
+# تشغيل السيرفر الوهمي في خلفية البوت
+threading.Thread(target=run_server, daemon=True).start()
+
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
