@@ -3,3 +3,12 @@ requests==2.31.0
 PyJWT
 protobuf
 protobuf-decoder
+pycryptodome
+urllib3
+certifi
+idna
+charset-normalizer
+pydantic
+python-dotenv
+aiohttp
+certifi
